@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:44:05 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/16 15:11:15 by ahamalai         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:29:30 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	printing(va_list arg, char c)
 	else if (c == 'u')
 		ft_print_unsigned(va_arg(arg, unsigned int), len);
 	else if (c == 'x')
-
+		len += ft_printhex(va_arg(arg, unsigned nt), c);
 	else if (c == 'X')
 	
 	else if (c == '%')
