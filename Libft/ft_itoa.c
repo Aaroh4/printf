@@ -1,56 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printhex.c                                      :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 16:23:17 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:28:36 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/11/03 13:56:49 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/16 13:42:28 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "ft_printf.h"
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 int	count(int n)
 {
 	int	count;
 
 	count = 0;
+	if (n <= 0)
+		count++;
 	while (n != 0)
 	{
-		n /= 16;
+		n /= 10;
 		count++;
 	}
 	return (count);
 }
 
-int	ft_printhex(long n, char c)
+char	*ft_itoa(int n)
 {
-	char *symbols;
+	char		*str;
+	int			i;
+	long int	num;
 
-	if (c == 'X')
-		symbols = "0123456789ABCDEF";
-	else
-		symbols = "0123456789abcdef";
-	return (ft_putchar(symbols[n]));
+	i = count(n);
+	num = n;
+	str = (char *)malloc(i + 1);
+	if (str == 0)
+		return (0);
+	str[i] = '\0';
+	if (num < 0)
+		num *= -1;
+	while (i > 0)
+	{
+		i--;
+		str[i] = (num % 10) + '0';
+		num = num / 10;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
 }

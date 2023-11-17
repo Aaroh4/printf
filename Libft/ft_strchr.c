@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/27 14:29:27 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:10:55 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+char	*ft_strchr(const char *s, int c)
 {
-	if (n > 9)
+	int		i;
+	char	p;
+	char	*str;
+
+	i = 0;
+	p = (char)c;
+	str = (char *)s;
+	while (str[i])
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		if (str[i] == p)
+			return (&str[i]);
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	if (str[i] == p)
+		return (&str[i]);
+	return (0);
 }

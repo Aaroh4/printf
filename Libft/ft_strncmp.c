@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/28 13:31:51 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:12:06 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_print_unsigned(unsigned int n, int *len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (n > 9)
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while ((s1[i] != '\0' && s2[i] != '\0') && i < n - 1)
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		if (s1[i] != s2[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 }

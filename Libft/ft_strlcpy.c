@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/27 11:36:47 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:08:12 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	if (n > 9)
+	size_t	i;
+
+	i = 0;
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (src[i] != '\0' && i < (dstsize - 1))
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		dst[i] = src[i];
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

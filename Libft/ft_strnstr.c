@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/28 12:32:15 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:05:09 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	if (n > 9)
+	size_t	i;
+	size_t	ei;
+
+	i = 0;
+	ei = 0;
+	if (*needle == 0)
+		return ((char *)haystack);
+	while (haystack[i] && i < len)
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		ei = 0;
+		while (haystack[i + ei] == needle[ei] && i + ei < len)
+		{
+			if (needle[ei + 1] == '\0')
+				return (&((char *)haystack)[i]);
+			ei++;
+		}
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	return (0);
 }

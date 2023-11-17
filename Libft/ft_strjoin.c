@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/30 12:08:05 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:05:40 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (n > 9)
+	int		i;
+	int		ei;
+	char	*s;
+
+	i = 0;
+	ei = 0;
+	s = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (s == NULL)
+		return (0);
+	while (s1[i])
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		s[i] = s1[i];
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	while (s2[ei])
+	{
+		s[i] = s2[ei];
+		i++;
+		ei++;
+	}
+	s[i] = '\0';
+	return (s);
 }

@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/28 13:30:47 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:09:19 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_print_unsigned(unsigned int n, int *len)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if (n > 9)
+	char	*pc;
+
+	pc = (char *)dst;
+	if (!dst && !src)
+		return (0);
+	while (n > 0)
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		*pc = *(char *)src;
+		pc++;
+		src++;
+		n--;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	return (dst);
 }

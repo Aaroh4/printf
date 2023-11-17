@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/30 15:14:16 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:07:57 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	if (n > 9)
+	size_t	i;
+
+	i = 0;
+	while (i < n)
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		if (((char *)s1)[i] != ((char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	return (0);
 }

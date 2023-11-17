@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/30 11:10:17 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:24:30 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (n > 9)
-	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
-	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	void	*p;
+
+	p = malloc(count * size);
+	if (p == NULL)
+		return (0);
+	ft_bzero(p, size * count);
+	return (p);
 }

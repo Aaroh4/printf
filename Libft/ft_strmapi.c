@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/11/07 10:50:25 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:11:00 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (n > 9)
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!s || !f)
+		return (0);
+	str = (char *)malloc(ft_strlen(s) + 1);
+	if (str == 0)
+		return (0);
+	while (s[i] != '\0')
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	str[i] = '\0';
+	return (str);
 }

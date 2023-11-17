@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:54:57 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:19:06 by ahamalai         ###   ########.fr       */
+/*   Created: 2023/10/28 13:59:57 by ahamalai          #+#    #+#             */
+/*   Updated: 2023/11/13 11:10:48 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_print_unsigned(unsigned int n, int *len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (n > 9)
+	char	*psrc;
+	char	*pdst;
+	size_t	i;
+
+	psrc = (char *)src;
+	pdst = (char *)dst;
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	if (pdst > psrc)
 	{
-		ft_print_unsigned(n / 10, len);
-		n = n % 10;
+		while (len-- > 0)
+			pdst[len] = psrc[len];
 	}
-	if (n < 10)
-		len += ft_putchar(n + '0');
+	else
+	{
+		while (i < len)
+		{
+			pdst[i] = psrc[i];
+			i++;
+		}
+	}
+	return (dst);
 }
