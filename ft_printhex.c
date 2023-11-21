@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:23:17 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 13:28:36 by ahamalai         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:45:02 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	if (write(1, &c, 1) < 0)
+		return (-1);
 	return (1);
 }
 
@@ -23,10 +24,17 @@ int	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+	{
+		if (write(1, "(null)", 6) < 0)
+			return (-1);
+		return (6);
+	}
 	while (str[i])
 	{
-		ft_putchar(str[i]);
-		i++;
+		i += ft_putchar(str[i]);
+		if (i < 0)
+			return (-1);
 	}
 	return (i);
 }
@@ -44,13 +52,44 @@ int	count(int n)
 	return (count);
 }
 
-int	ft_printhex(long n, char c)
+int	ft_printhex(long n, int base, char c)
 {
-	char *symbols;
+	int		count;
+	char	*symbols;
 
 	if (c == 'X')
 		symbols = "0123456789ABCDEF";
 	else
 		symbols = "0123456789abcdef";
-	return (ft_putchar(symbols[n]));
+	if (n < 0)
+	{
+		if (write(1, "-", 1) < 0)
+			return (-1);
+		return (ft_printhex((n * -1), base, c) + 1);
+	}
+	else if (n < base)
+		return (ft_putchar(symbols[n]));
+	else
+	{
+		count = ft_printhex(n / base, base, c);
+		if (count < 0)
+			return (-1);
+		return (count + ft_printhex(n % base, base, c));
+	}
+}
+
+int	ft_printptr(unsigned long n)
+{
+	int		count;
+	char	*symbols;
+
+	symbols = "0123456789abcdef";
+	count = 0;
+	count += ft_putstr("0x");
+	if (count < 0)
+		return (-1);
+	if (n < 16)
+		return (count += ft_putchar(symbols[n]));
+	count += (ft_printhex((n / 16), 16, 'x'));
+	return (count + ft_printhex(n % 16, 16, 'x'));
 }

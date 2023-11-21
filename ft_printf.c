@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:44:05 by ahamalai          #+#    #+#             */
-/*   Updated: 2023/11/17 15:09:56 by ahamalai         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:37:24 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	printing(va_list arg, char c)
 		len += ft_putchar(va_arg(arg, int));
 	else if (c == 's')
 		len += ft_putstr(va_arg(arg, char *));
-	//else if (c == 'p')
-	//	len +=
+	else if (c == 'p')
+		len += ft_printptr((unsigned long)(va_arg(arg, void *)));
 	else if (c == 'd' || c == 'i')
-		ft_printnbr(va_arg(arg, int), &len);
+		len += ft_printhex((long)(va_arg(arg, int)), 10, c);
 	else if (c == 'u')
-		ft_print_unsigned(va_arg(arg, unsigned int), &len);
+		len += ft_printhex((unsigned long)va_arg(arg, unsigned int), 10, c);
 	else if (c == 'x' || c == 'X')
-		len += ft_printhex(va_arg(arg, unsigned int), c);
+		len += ft_printhex((long)(va_arg(arg, unsigned int)), 16, c);
 	else
 		len += write(1, &c, 1);
 	return (len);
@@ -37,19 +37,19 @@ int	printing(va_list arg, char c)
 int	ft_printf(const char *str, ...)
 {
 	va_list	arg;
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 
 	i = 0;
 	va_start(arg, str);
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		if (*str == '%')
 			len = printing(arg, *(++str));
 		else if ((' ' >= *str || *str <= '~')
 			|| ('\t' >= *str || *str <= '\r'))
 			len = write(1, str, 1);
-		else 
+		else
 			i++;
 		if (len < 0)
 			return (-1);

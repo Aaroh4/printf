@@ -6,7 +6,7 @@
 #    By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 12:03:42 by ahamalai          #+#    #+#              #
-#    Updated: 2023/11/13 11:31:09 by ahamalai         ###   ########.fr        #
+#    Updated: 2023/11/21 13:01:25 by ahamalai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,8 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = ./includes
-
 %.o: %.c
-	cc -Wall -Wextra -Werror -c $< -o $@ -I $(HEADERS)
+	cc -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(OBJ)
 
@@ -42,6 +40,6 @@ fclean: clean
 re: fclean all
 
 libft.a: $(OBJ)
-	ar -rc libft.a $(OBJ)
+	ar -rcs libft.a $(OBJ)
 
 .PHONY: all clean fclean re 
